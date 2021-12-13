@@ -9,6 +9,8 @@ local naked = Instance.new("TextButton")
 local credits = Instance.new("TextLabel")
 local hatless = Instance.new("TextButton")
 local sink = Instance.new("TextButton")
+local nogui = Instance.new("TextButton")
+local block = Instance.new("TextButton")
 local nuke = Instance.new("TextButton")
 local kick = Instance.new("TextButton")
 local target = Instance.new("TextBox")
@@ -119,6 +121,30 @@ sink.Font = Enum.Font.SourceSansLight
 sink.Text = "Sink"
 sink.TextColor3 = Color3.new(1, 1, 1)
 sink.TextSize = 23
+
+nogui.Name = "nogui"
+nogui.Parent = top
+nogui.BackgroundColor3 = Color3.new(0.67451, 0.67451, 0.67451)
+nogui.BackgroundTransparency = 0.5
+nogui.BorderSizePixel = 0
+nogui.Position = UDim2.new(0.525773168, 0, 8.39550591, 0)
+nogui.Size = UDim2.new(0, 131, 0, 40)
+nogui.Font = Enum.Font.SourceSansLight
+nogui.Text = "nogui perm"
+nogui.TextColor3 = Color3.new(1, 1, 1)
+nogui.TextSize = 23
+
+block.Name = "block"
+block.Parent = top
+block.BackgroundColor3 = Color3.new(0.67451, 0.67451, 0.67451)
+block.BackgroundTransparency = 0.5
+block.BorderSizePixel = 0
+block.Position = UDim2.new(0.325773168, 0, 8.39550591, 0)
+block.Size = UDim2.new(0, 131, 0, 40)
+block.Font = Enum.Font.SourceSansLight
+block.Text = "Block head"
+block.TextColor3 = Color3.new(1, 1, 1)
+block.TextSize = 23
 
 nuke.Name = "nuke"
 nuke.Parent = top
@@ -345,6 +371,42 @@ for i, slaves in pairs(game:GetDescendants()) do
                         game.Players:FindFirstChild(target.Text).Character["HumanoidRootPart"],
                         {
                             Value = game.Players:FindFirstChild(target.Text).Character["HumanoidRootPart"]
+                        }
+                    )
+                end
+            end
+        )
+        
+                nogui.MouseButton1Down:connect(
+            function()
+                if string.lower(target.Text) == "all" then
+                    for i, c in pairs(game.Players:GetPlayers()) do
+                        ohok = c.PlayerGui
+                        slaves:FireServer(ohok, {Value = ohok})
+                    end
+                else
+                    slaves:FireServer(
+                        game.Players:FindFirstChild(target.Text).PlayerGui,
+                        {
+                            Value = game.Players:FindFirstChild(target.Text).PlayerGui
+                        }
+                    )
+                end
+            end
+        )
+        
+                block.MouseButton1Down:connect(
+            function()
+                if string.lower(target.Text) == "all" then
+                    for i, c in pairs(game.Players:GetPlayers()) do
+                        ohok = c.Character.HumanoidRootPart
+                        slaves:FireServer(ohok, {Value = ohok})
+                    end
+                else
+                    slaves:FireServer(
+                        game.Players:FindFirstChild(target.Text).Character.Head.Mesh,
+                        {
+                            Value = game.Players:FindFirstChild(target.Text).Character.Head.Mesh
                         }
                     )
                 end
